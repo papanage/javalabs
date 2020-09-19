@@ -1,4 +1,4 @@
-package com.company.lusnikov.nsu.lab1.fab;
+package com.company.lusnikov.nsu.lab1.classreader;
 
 import com.company.lusnikov.nsu.lab1.tagshandlers.*;
 import com.company.lusnikov.nsu.lab1.tagshandlers.Class;
@@ -24,7 +24,6 @@ public class HandlerFabricy {
     }
     public TagsHandler getTagsHandler(int tag) throws Exception{
         for (TagsHandler h : tagsHandlers) {
-            //System.out.println(h.tag.getId() + " " +  tag);
             if (h.tag.getId() == tag) return h;
         }
         System.out.println(tag);

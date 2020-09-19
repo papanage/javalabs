@@ -1,7 +1,8 @@
-package com.company.lusnikov.nsu.lab1.utils;
+package com.company.lusnikov.nsu.lab1.utils.data;
 
-import com.company.lusnikov.nsu.lab1.ConstantNode;
+import com.company.lusnikov.nsu.lab1.utils.node.ConstantNode;
 
+import java.sql.Connection;
 import java.util.Vector;
 
 public class Ref extends ResolveData {
@@ -17,9 +18,9 @@ public class Ref extends ResolveData {
 
     @Override
     public String resolve(Vector<ConstantNode> nodes) {
+        //System.out.println("hello" + getData() + " " + (Integer.parseInt(toResolve) - 1));
         StringBuilder stringBuilder = new StringBuilder();
-        //System.out.println("index = " + Integer.parseInt(toResolve));
-        //System.out.println("size = " + nodes.size());
+        if ((Integer.parseInt(toResolve) - 1) >= nodes.size()) return stringBuilder.toString();
         ConstantNode c = nodes.get(Integer.parseInt(toResolve) - 1);
         for (ResolveData s : c.getRefs()){
           stringBuilder.append(s.resolve(nodes));

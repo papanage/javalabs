@@ -1,6 +1,6 @@
-package com.company.lusnikov.nsu.lab1.utils;
+package com.company.lusnikov.nsu.lab1.utils.data;
 
-import com.company.lusnikov.nsu.lab1.ConstantNode;
+import com.company.lusnikov.nsu.lab1.utils.node.ConstantNode;
 
 import java.util.Vector;
 

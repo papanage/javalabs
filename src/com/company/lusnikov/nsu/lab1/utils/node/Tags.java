@@ -1,4 +1,4 @@
-package com.company.lusnikov.nsu.lab1;
+package com.company.lusnikov.nsu.lab1.utils.node;
 
 public enum Tags {
     CLASS(7),
