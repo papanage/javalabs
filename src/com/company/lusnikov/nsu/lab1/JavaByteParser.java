@@ -2,6 +2,7 @@ package com.company.lusnikov.nsu.lab1;
 
 import com.company.lusnikov.nsu.lab1.classreader.ClassReader;
 import com.company.lusnikov.nsu.lab1.utils.data.ResolveData;
+import com.company.lusnikov.nsu.lab1.utils.data.StaticData;
 import com.company.lusnikov.nsu.lab1.utils.node.ConstantNode;
 
 import java.io.File;
@@ -14,7 +15,6 @@ public class JavaByteParser {
 
         System.out.println(file.getPath());
        ClassReader reader = new ClassReader();
-        //System.out.println("ho");
         FileInputStream fileInputStream = null;
         try {
             fileInputStream = new FileInputStream(file);
@@ -23,7 +23,6 @@ public class JavaByteParser {
             e.printStackTrace();
         }
 
-        //System.out.println("ho");
        Vector<ConstantNode> nodes = reader.read(fileInputStream);
 
        int v = 1;
@@ -32,12 +31,15 @@ public class JavaByteParser {
                v++;
                continue;
            }
-           System.out.println(v++ + ". " + node.getTag() + ": ");
+           System.out.print("#" + v++ + " = " + node.getTag() + "   ");
            for (ResolveData h : node.getRefs()){
                System.out.print(h.getData());
            }
-           System.out.println(" \\\\" + ConstantNode.resolveNote(nodes, nodes.indexOf(node)));
-           System.out.println("\n");
+           if (node.getRefs().get(0) instanceof StaticData && node.getRefs().size() == 1){
+               System.out.println("");
+           }
+           else System.out.println("    // " + ConstantNode.resolveNote(nodes, nodes.indexOf(node)));
+           //
        }
     }
 

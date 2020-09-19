@@ -17,19 +17,15 @@ public class HandleTagsController {
         int tag;
         int y = computeSize(inputStream);
         System.out.println("real size = " + (y - 1));
-        //System.out.println("y = " + y);
         while (--y != 0){
-            //System.out.println("y = " + y);
             tag = inputStream.read();
-            if (tag == 0) {
-                //System.out.println("y = " + y);
-                break;
-            }
             TagsHandler t = handlerFabricy.getTagsHandler(tag);
 
             pool.add(handlerFabricy.getTagsHandler(tag).compute(inputStream));
+
             if (t.tag.equals(Tags.LONG) || t.tag.equals(Tags.DOUBLE)){
                 pool.add(new ConstantNode(null, null));
+                y--;
             }
         }
         System.out.println("size = " + pool.size());

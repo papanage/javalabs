@@ -19,7 +19,6 @@ public class ClassReader {
      * @throws Exception просто везде прокидываем, что сильно не думать
      */
     private boolean readHandle(InputStream inputStream) throws Exception{
-        System.out.println("gg");
         for (int i = 0; i < 8; i++ ){
             inputStream.read();
         }
