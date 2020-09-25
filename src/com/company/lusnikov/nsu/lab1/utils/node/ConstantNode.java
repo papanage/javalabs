@@ -20,13 +20,6 @@ public class ConstantNode {
     public ConstantNode(Tags tag, Vector<ResolveData> refs) {
         this.tag = tag;
         this.refs = refs;
-       // System.out.println("new tag");
-        /*System.out.println(tag.getId() );
-        for (ResolveData h : refs){
-            System.out.print(h.getData());
-        }
-        System.out.println("\n");
-*/
 
     }
 

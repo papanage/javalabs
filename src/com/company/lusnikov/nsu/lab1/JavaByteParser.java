@@ -13,8 +13,8 @@ import java.util.Vector;
 public class JavaByteParser {
     public static void ShowConstant(File file) throws Exception {
 
-        System.out.println(file.getPath());
-       ClassReader reader = new ClassReader();
+        //System.out.println(file.getPath());
+        ClassReader reader = new ClassReader();
         FileInputStream fileInputStream = null;
         try {
             fileInputStream = new FileInputStream(file);

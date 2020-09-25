@@ -16,7 +16,7 @@ public class HandleTagsController {
 
         int tag;
         int y = computeSize(inputStream);
-        System.out.println("real size = " + (y - 1));
+        //System.out.println("real size = " + (y - 1));
         while (--y != 0){
             tag = inputStream.read();
             TagsHandler t = handlerFabricy.getTagsHandler(tag);
@@ -28,7 +28,7 @@ public class HandleTagsController {
                 y--;
             }
         }
-        System.out.println("size = " + pool.size());
+        //System.out.println("size = " + pool.size());
         return pool;
 
     }
