@@ -12,7 +12,7 @@ import java.util.Vector;
 
 public class JavaByteParser {
     public static void ShowConstant(File file) throws Exception {
-
+        System.out.println("Constant pool:");
         //System.out.println(file.getPath());
         ClassReader reader = new ClassReader();
         FileInputStream fileInputStream = null;
