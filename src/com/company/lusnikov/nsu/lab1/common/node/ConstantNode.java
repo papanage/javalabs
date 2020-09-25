@@ -1,6 +1,6 @@
-package com.company.lusnikov.nsu.lab1.utils.node;
+package com.company.lusnikov.nsu.lab1.common.node;
 
-import com.company.lusnikov.nsu.lab1.utils.data.ResolveData;
+import com.company.lusnikov.nsu.lab1.common.data.ResolveData;
 
 import java.util.Vector;
 

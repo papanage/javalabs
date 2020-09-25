@@ -1,8 +1,8 @@
 package com.company.lusnikov.nsu.lab1.classreader;
 
 import com.company.lusnikov.nsu.lab1.tagshandlers.TagsHandler;
-import com.company.lusnikov.nsu.lab1.utils.node.ConstantNode;
-import com.company.lusnikov.nsu.lab1.utils.node.Tags;
+import com.company.lusnikov.nsu.lab1.common.node.ConstantNode;
+import com.company.lusnikov.nsu.lab1.common.node.Tags;
 
 import java.io.IOException;
 import java.io.InputStream;

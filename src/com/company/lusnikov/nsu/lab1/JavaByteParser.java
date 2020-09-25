@@ -1,9 +1,9 @@
 package com.company.lusnikov.nsu.lab1;
 
 import com.company.lusnikov.nsu.lab1.classreader.ClassReader;
-import com.company.lusnikov.nsu.lab1.utils.data.ResolveData;
-import com.company.lusnikov.nsu.lab1.utils.data.StaticData;
-import com.company.lusnikov.nsu.lab1.utils.node.ConstantNode;
+import com.company.lusnikov.nsu.lab1.common.data.ResolveData;
+import com.company.lusnikov.nsu.lab1.common.data.StaticData;
+import com.company.lusnikov.nsu.lab1.common.node.ConstantNode;
 
 import java.io.File;
 import java.io.FileInputStream;

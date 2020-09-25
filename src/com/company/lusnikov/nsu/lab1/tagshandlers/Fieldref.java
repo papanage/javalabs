@@ -1,10 +1,10 @@
 package com.company.lusnikov.nsu.lab1.tagshandlers;
 
-import com.company.lusnikov.nsu.lab1.utils.node.ConstantNode;
-import com.company.lusnikov.nsu.lab1.utils.node.Tags;
-import com.company.lusnikov.nsu.lab1.utils.data.Ref;
-import com.company.lusnikov.nsu.lab1.utils.data.ResolveData;
-import com.company.lusnikov.nsu.lab1.utils.data.StaticData;
+import com.company.lusnikov.nsu.lab1.common.node.ConstantNode;
+import com.company.lusnikov.nsu.lab1.common.node.Tags;
+import com.company.lusnikov.nsu.lab1.common.data.Ref;
+import com.company.lusnikov.nsu.lab1.common.data.ResolveData;
+import com.company.lusnikov.nsu.lab1.common.data.StaticData;
 
 import java.io.IOException;
 import java.io.InputStream;
