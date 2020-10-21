@@ -10,10 +10,10 @@ import org.objectweb.asm.RecordComponentVisitor;
 import java.io.File;
 import java.io.FileOutputStream;
 
-public class GuessGame2Dump implements Opcodes {
+public class GuessGameAsm implements Opcodes {
 
     public static void main(String[] args) throws Exception{
-        File file = new File("/C:\\Users\\Vasya\\IdeaProjects\\javalabs\\resources\\GuessGame2.class");
+        File file = new File("/C:\\Users\\Vasya\\IdeaProjects\\javalabs\\resources\\GuessGame.class");
         FileOutputStream fileOutputStream = new FileOutputStream(file);
         fileOutputStream.write(dump());
     }
@@ -26,9 +26,9 @@ public class GuessGame2Dump implements Opcodes {
         MethodVisitor methodVisitor;
         AnnotationVisitor annotationVisitor0;
 
-        classWriter.visit(V1_8, ACC_PUBLIC | ACC_SUPER, "GuessGame2", null, "java/lang/Object", null);
+        classWriter.visit(V1_8, ACC_PUBLIC | ACC_SUPER, "GuessGame", null, "java/lang/Object", null);
 
-        classWriter.visitSource("GuessGame2.java", null);
+        classWriter.visitSource("GuessGame.java", null);
 
 
         {
@@ -47,7 +47,7 @@ public class GuessGame2Dump implements Opcodes {
             methodVisitor.visitVarInsn(ALOAD, 1);
 
             methodVisitor.visitMethodInsn(INVOKEVIRTUAL, "java/util/Random", "nextInt", "()I", false);
-
+            methodVisitor.visitMethodInsn(INVOKESTATIC, "java/lang/Math", "abs", "(I)I", false);
             methodVisitor.visitIntInsn(BIPUSH, 100);
             methodVisitor.visitInsn(IREM);
             methodVisitor.visitInsn(ICONST_1);
@@ -70,6 +70,7 @@ public class GuessGame2Dump implements Opcodes {
 
             Label label1 = new Label();
             methodVisitor.visitLabel(label1);
+            methodVisitor.visitFrame(Opcodes.F_APPEND,3, new Object[] {"java/util/Random", Opcodes.INTEGER, "java/util/Scanner"}, 0, null);
             methodVisitor.visitVarInsn(ALOAD, 3);
             methodVisitor.visitMethodInsn(INVOKEVIRTUAL, "java/util/Scanner", "nextInt", "()I", false);
             methodVisitor.visitVarInsn(ISTORE, 4);
@@ -88,6 +89,7 @@ public class GuessGame2Dump implements Opcodes {
             methodVisitor.visitJumpInsn(GOTO, label3);
 
             methodVisitor.visitLabel(label2);
+            methodVisitor.visitFrame(Opcodes.F_APPEND,1, new Object[] {Opcodes.INTEGER}, 0, null);
             methodVisitor.visitVarInsn(ILOAD, 4);
             methodVisitor.visitVarInsn(ILOAD, 2);
 
@@ -100,11 +102,13 @@ public class GuessGame2Dump implements Opcodes {
             methodVisitor.visitJumpInsn(GOTO, label3);
 
             methodVisitor.visitLabel(label4);
+            methodVisitor.visitFrame(Opcodes.F_SAME, 0, null, 0, null);
             methodVisitor.visitFieldInsn(GETSTATIC, "java/lang/System", "out", "Ljava/io/PrintStream;");
             methodVisitor.visitLdcInsn("Your guess is greater than the secret number.");
             methodVisitor.visitMethodInsn(INVOKEVIRTUAL, "java/io/PrintStream", "println", "(Ljava/lang/String;)V", false);
 
             methodVisitor.visitLabel(label3);
+            methodVisitor.visitFrame(Opcodes.F_SAME, 0, null, 0, null);
             methodVisitor.visitVarInsn(ILOAD, 4);
             methodVisitor.visitVarInsn(ILOAD, 2);
             methodVisitor.visitJumpInsn(IF_ICMPNE, label1);

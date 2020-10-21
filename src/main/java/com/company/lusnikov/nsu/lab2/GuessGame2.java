@@ -5,11 +5,14 @@ import jdk.internal.org.objectweb.asm.util.ASMifier;
 import java.time.Instant;
 import java.util.Random;
 import java.util.Scanner;
+
+import static java.lang.Math.abs;
+
 public class GuessGame2 {
 
     public static void main(String[] args) {
         Random random = new Random(Instant.now().hashCode());
-        int i = random.nextInt() % 100 + 1;
+        int i = abs(random.nextInt()) % 100 + 1;
         System.out.println("I guess number");
         Scanner keyboard = new Scanner(System.in);
         int guess;
