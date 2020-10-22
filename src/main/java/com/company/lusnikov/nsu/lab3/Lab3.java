@@ -8,6 +8,7 @@ import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.net.URLClassLoader;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -17,13 +18,12 @@ import java.util.stream.Stream;
 
 public class Lab3 {
     public static List<String> names = new ArrayList<>();
-    public static void main(String[] args) throws URISyntaxException, MalformedURLException, ClassNotFoundException {
-
-        File file = new File("C:\\Users\\Vasya\\IdeaProjects\\javalabs\\src\\main\\resources\\A");
+    public static void main(String[] args) throws Exception {
+        File file = new File(args[0]);
         URL[] urls1 = new URL[]{file.toURI().toURL()};
         ClassLoader cl = new URLClassLoader(urls1);
         getClassNames(file, null);
-       for (String s : names) {
+        for (String s : names) {
             Class<?> aClass = cl.loadClass(s);
             try {
                 Method method = aClass.getDeclaredMethod("getSecurityMessage");
@@ -38,7 +38,11 @@ public class Lab3 {
         }
     }
 
-    public static void getClassNames(File dir, String parentName) {
+    public static void getClassNames(File dir, String parentName) throws Exception {
+        if (dir == null || dir.listFiles() == null) {
+            throw new Exception();
+        }
+
         for (File f : dir.listFiles()) {
             if(!f.isDirectory()) {
                 StringBuilder stringBuilder = new StringBuilder();
