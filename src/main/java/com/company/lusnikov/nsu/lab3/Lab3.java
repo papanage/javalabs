@@ -26,6 +26,7 @@ public class Lab3 {
         for (String s : names) {
             Class<?> aClass = cl.loadClass(s);
             try {
+
                 Method method = aClass.getDeclaredMethod("getSecurityMessage");
                 Object object = aClass.getConstructor().newInstance();
                 method.setAccessible(true);
