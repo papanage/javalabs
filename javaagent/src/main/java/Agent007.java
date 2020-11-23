@@ -6,6 +6,6 @@ public class Agent007 {
         System.out.println("Hello! I`m java agent");
         MyTransformer myTransformer = new MyTransformer();
         instrumentation.addTransformer(myTransformer);
-        System.out.println("count load: " + MyTransformer.count);
+        System.out.println("count load: " + instrumentation.getAllLoadedClasses().length);
     }
 }
