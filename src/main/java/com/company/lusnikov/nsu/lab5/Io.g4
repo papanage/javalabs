@@ -2,19 +2,26 @@ grammar Io;
 prog:	(expr NEWLINE)* ;
 expr:
     var
-    | goto
+    | goto_
     | label
-    | if
+    | if_
     | print
+    | declvar
     ;
-var: ( VARNAME ('=') (INT | STRING));
-goto: ('goto ' INT) ;
-label: ('label ' INT) ;
-print: 'print' ;
-if: ('('cond') then' (expr NEWLINE)* 'end') ;
-cond: 'jj';
+declvar : SPACE* 'var ' VARNAME ('=') (INT |STRING);
+var: SPACE* VARNAME ('=') (INT | STRING);
+goto_: SPACE* 'goto ' INT ;
+label: SPACE* 'label ' INT ;
+print: SPACE* 'print' SPACE* VARNAME;
+if_: SPACE* 'if ' NEWLINE* '('cond')' NEWLINE* ' then' NEWLINE (expr NEWLINE)* 'end' ;
+cond:
+    'not' cond
+    | orderable '>' orderable;
+orderable : INT | STRING | VARNAME;
 NEWLINE : [\r\n]+ ;
-INT     : [0-9]+ ;
+INT     : [1-9]+[0-9]* | [0];
 VARNAME : [a-z]+;
-STRING  : '"'[a-z0-9]+'"' ;
+STRING  : '"'STRINGL'"' ;
+STRINGL : [a-z0-9]+ ;
+SPACE : [ ] ;
 

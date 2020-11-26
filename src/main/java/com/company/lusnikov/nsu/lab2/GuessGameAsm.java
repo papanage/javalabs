@@ -1,11 +1,8 @@
 package com.company.lusnikov.nsu.lab2;
-import org.objectweb.asm.AnnotationVisitor;
 import org.objectweb.asm.ClassWriter;
-import org.objectweb.asm.FieldVisitor;
 import org.objectweb.asm.Label;
 import org.objectweb.asm.MethodVisitor;
 import org.objectweb.asm.Opcodes;
-import org.objectweb.asm.RecordComponentVisitor;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -14,7 +11,7 @@ import java.io.FileOutputStream;
 public class GuessGameAsm implements Opcodes {
 
     public static void main(String[] args) throws Exception{
-        File file = new File("/C:\\Users\\Vasya\\IdeaProjects\\javalabs\\resources\\GuessGame.class");
+        File file = new File("GuessGame.class");
         FileOutputStream fileOutputStream = new FileOutputStream(file);
         fileOutputStream.write(dump());
     }
