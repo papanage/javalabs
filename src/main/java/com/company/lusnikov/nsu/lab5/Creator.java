@@ -24,7 +24,6 @@ import static org.objectweb.asm.Opcodes.GETSTATIC;
 import static org.objectweb.asm.Opcodes.INVOKESPECIAL;
 import static org.objectweb.asm.Opcodes.INVOKESTATIC;
 import static org.objectweb.asm.Opcodes.INVOKEVIRTUAL;
-import static org.objectweb.asm.Opcodes.ISTORE;
 import static org.objectweb.asm.Opcodes.RETURN;
 import static org.objectweb.asm.Opcodes.V1_8;
 
@@ -60,19 +59,18 @@ public class Creator extends gramma.IoBaseListener{
             zn = zn.substring(1, zn.length() - 1);
             current.getStrings().put(varname, new ContextVars.StringWithPos(zn, countVars));
             methodVisitor.visitLdcInsn(zn);
-            methodVisitor.visitVarInsn(ASTORE, countVars);
         } else {
             countVars++;
             zn = declvarContext.INT().getText();
             current.getIntegers().put(varname, new ContextVars.IntWithPos(Integer.parseInt(zn), countVars));
             methodVisitor.visitLdcInsn(Integer.parseInt(zn));
-            methodVisitor.visitVarInsn(ISTORE, countVars);
+            methodVisitor.visitMethodInsn(INVOKESTATIC, "java/lang/Integer", "valueOf", "(I)Ljava/lang/Integer;", false);
         }
         if (!isDecl) {
             operCount++;
             isDecl = true;
         }
-      //  methodVisitor.visitVarInsn(ASTORE, countVars);
+        methodVisitor.visitVarInsn(ASTORE, countVars);
         System.out.println("vardecl:" + varname + " zn: "  +zn +  "count: " + countVars);
         super.exitDeclvar(declvarContext);
     }
@@ -93,11 +91,9 @@ public class Creator extends gramma.IoBaseListener{
         } else {
             pos = current.getIntegers().get(ctx.VARNAME().getText()).getPos();
 
-            methodVisitor.visitMethodInsn(INVOKESTATIC, "java/lang/Integer", "valueOf", "(I)Ljava/lang/Integer;", false);
-            methodVisitor.visitVarInsn(ASTORE, pos);
             methodVisitor.visitFieldInsn(GETSTATIC, "java/lang/System", "out", "Ljava/io/PrintStream;");
             methodVisitor.visitVarInsn(ALOAD, pos);
-            methodVisitor.visitMethodInsn(INVOKEVIRTUAL, "java/io/PrintStream", "println", "(Ljava/lang/String;)V", false);
+            methodVisitor.visitMethodInsn(INVOKEVIRTUAL, "java/io/PrintStream", "println", "(Ljava/lang/Object;)V", false);
         }
 
         System.out.println("print:" + ctx.VARNAME().getText() + " zn: "  + pos);
@@ -154,7 +150,7 @@ public class Creator extends gramma.IoBaseListener{
 
         current.getIntegers().forEach(
                 (k, v)->
-                        methodVisitor.visitLocalVariable(k, "I", null, current.labelList.get(0), last, v.getPos()));
+                        methodVisitor.visitLocalVariable(k, "Ljava/lang/Integer;", null, current.labelList.get(0), last, v.getPos()));
 
         current.getStrings().forEach(
                 (k, v)->
