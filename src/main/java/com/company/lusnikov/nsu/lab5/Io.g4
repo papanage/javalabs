@@ -1,4 +1,5 @@
 grammar Io;
+
 prog:	(expr NEWLINE)* ;
 expr:
     var
@@ -12,7 +13,7 @@ declvar : SPACE* 'var ' VARNAME ('=') (INT |STRING);
 var: SPACE* VARNAME ('=') (INT | STRING);
 goto_: SPACE* 'goto ' INT ;
 label: SPACE* 'label ' INT ;
-print: SPACE* 'print' SPACE* VARNAME;
+print: SPACE* 'print' SPACE* (VARNAME | STRING);
 if_: SPACE* 'if ' NEWLINE* '('cond')' NEWLINE* ' then' NEWLINE (expr NEWLINE)* 'end' ;
 cond:
     'not' cond
