@@ -18,6 +18,8 @@ import java.nio.charset.StandardCharsets;
 import static org.objectweb.asm.Opcodes.ACC_PUBLIC;
 import static org.objectweb.asm.Opcodes.ACC_STATIC;
 import static org.objectweb.asm.Opcodes.ACC_SUPER;
+import static org.objectweb.asm.Opcodes.ALOAD;
+import static org.objectweb.asm.Opcodes.INVOKESPECIAL;
 import static org.objectweb.asm.Opcodes.RETURN;
 import static org.objectweb.asm.Opcodes.V1_8;
 
@@ -125,7 +127,7 @@ public class Creator extends gramma.IoBaseListener{
         parser.addParseListener(this);
         parser.prog();
 
-        computer.generate(methodVisitor);
+        //computer.generate(methodVisitor);
 
 
         methodVisitor.visitInsn(RETURN);
@@ -159,7 +161,23 @@ public class Creator extends gramma.IoBaseListener{
 
         classWriter.visit(V1_8, ACC_PUBLIC | ACC_SUPER, name, null, "java/lang/Object", null);
 
-      //  classWriter.visitSource("Test.java", null);
+        classWriter.visitSource("Test.java", null);
+
+        {
+            methodVisitor = classWriter.visitMethod(ACC_PUBLIC, "<init>", "()V", null, null);
+            methodVisitor.visitCode();
+            Label label0 = new Label();
+            methodVisitor.visitLabel(label0);
+            methodVisitor.visitLineNumber(3, label0);
+            methodVisitor.visitVarInsn(ALOAD, 0);
+            methodVisitor.visitMethodInsn(INVOKESPECIAL, "java/lang/Object", "<init>", "()V", false);
+            methodVisitor.visitInsn(RETURN);
+            Label label1 = new Label();
+            methodVisitor.visitLabel(label1);
+            methodVisitor.visitLocalVariable("this", "L"+name+";", null, label0, label1, 0);
+            methodVisitor.visitMaxs(1, 1);
+            methodVisitor.visitEnd();
+        }
 
 
 
