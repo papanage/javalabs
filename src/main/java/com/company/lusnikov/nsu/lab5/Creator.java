@@ -1,15 +1,20 @@
 package com.company.lusnikov.nsu.lab5;
 
 import com.company.lusnikov.nsu.lab5.virtual.DeclVarNode;
+import com.company.lusnikov.nsu.lab5.virtual.GotoNode;
 import com.company.lusnikov.nsu.lab5.virtual.IoComputer;
+import com.company.lusnikov.nsu.lab5.virtual.LabelNode;
 import com.company.lusnikov.nsu.lab5.virtual.PrintNode;
 import gramma.IoParser;
 import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.apache.commons.io.FileUtils;
+import org.objectweb.asm.AnnotationVisitor;
 import org.objectweb.asm.ClassWriter;
+import org.objectweb.asm.FieldVisitor;
 import org.objectweb.asm.Label;
 import org.objectweb.asm.MethodVisitor;
+import org.objectweb.asm.RecordComponentVisitor;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -88,6 +93,30 @@ public class Creator extends gramma.IoBaseListener{
         super.enterPrint(ctx);
     }
 
+    @Override
+    public void exitLabel(IoParser.LabelContext ctx) {
+        System.out.println("LABEL: " + ctx.INT().toString());
+        Label label = new Label();
+        computer.getProg().add(LabelNode
+                .builder()
+                .id(Integer.parseInt(ctx.INT().toString()))
+                .label(label)
+                .build());
+        computer.context.getLabelIntegerMap().put(label, computer.getProg().size() - 1);
+        computer.context.getLabelList().put(Integer.parseInt(ctx.INT().toString()), label);
+        super.exitLabel(ctx);
+    }
+
+    @Override
+    public void exitGoto_(IoParser.Goto_Context ctx) {
+        int id = Integer.parseInt(ctx.INT().toString());
+        computer.getProg().add(GotoNode
+                .builder()
+                .id(id)
+                .build());
+        super.exitGoto_(ctx);
+    }
+
 
 
     public static void main(String[] args) throws Exception {
@@ -127,7 +156,7 @@ public class Creator extends gramma.IoBaseListener{
         parser.addParseListener(this);
         parser.prog();
 
-        //computer.generate(methodVisitor);
+        computer.generate(methodVisitor);
 
 
         methodVisitor.visitInsn(RETURN);
@@ -147,8 +176,8 @@ public class Creator extends gramma.IoBaseListener{
                         methodVisitor.visitLocalVariable(k, "Ljava/lang/String;", null, computer.context.getLabelList().get(0), last, v.getPos()));
 
 
-        methodVisitor.visitMaxs(computer.context.getOperCount2(), computer.context.getCountVars());
-        System.out.println("STACK : " + computer.context.getOperCount2() + " "  + (computer.context.getCountVars()+1));
+        methodVisitor.visitMaxs(computer.context.getOperCount2(), computer.context.getCountVars()+2);
+        System.out.println("STACK : " + computer.context.getOperCount2() + " "  + (computer.context.getCountVars()+2));
         methodVisitor.visitEnd();
     }
 
@@ -157,7 +186,9 @@ public class Creator extends gramma.IoBaseListener{
     public byte[] dump (gramma.IoParser parser, String name) throws Exception {
 
         ClassWriter classWriter = new ClassWriter(0);
-
+        FieldVisitor fieldVisitor;
+        RecordComponentVisitor recordComponentVisitor;
+        AnnotationVisitor annotationVisitor0;
 
         classWriter.visit(V1_8, ACC_PUBLIC | ACC_SUPER, name, null, "java/lang/Object", null);
 
@@ -188,7 +219,7 @@ public class Creator extends gramma.IoBaseListener{
 
 
 
-        computer.context.getLabelList().add(label0);
+        computer.context.getLabelList().put(0, label0);
 
         create(parser, methodVisitor);
 

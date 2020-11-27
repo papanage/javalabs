@@ -25,6 +25,7 @@ public class DeclVarNode implements IoNode{
             methodVisitor.visitLdcInsn(s);
         } else {
             context.getIntegers().put(name, new ContextVars.IntWithPos(i, context.getCountVars()));
+            methodVisitor.visitLdcInsn(i);
             methodVisitor.visitMethodInsn(INVOKESTATIC, "java/lang/Integer", "valueOf", "(I)Ljava/lang/Integer;", false);
         }
         methodVisitor.visitVarInsn(ASTORE, context.getCountVars());

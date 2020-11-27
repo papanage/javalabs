@@ -1,1 +1,8 @@
 var a=44444
+label 2
+var d=455
+goto 1
+print a
+label 1
+print d
+goto 2

@@ -5,9 +5,7 @@ import lombok.Data;
 import lombok.NonNull;
 import org.objectweb.asm.Label;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 @Data
@@ -15,7 +13,14 @@ public class ContextVars {
 
     private Map<String, StringWithPos> strings = new HashMap<>();
     private Map<String, IntWithPos> integers = new HashMap<>();
-    private List<Label> labelList = new ArrayList<>();
+    /**
+     * label, pos
+     */
+    private Map<Label, Integer> labelIntegerMap = new HashMap<>();
+    /**
+     * id, label
+     */
+    private Map<Integer, Label> labelList = new HashMap<>();
 
     private Boolean isPrint = false;
     private Boolean isDecl = false;

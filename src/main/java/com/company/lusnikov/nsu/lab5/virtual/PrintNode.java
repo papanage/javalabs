@@ -5,9 +5,7 @@ import com.company.lusnikov.nsu.lab5.ContextVars;
 import lombok.Builder;
 import org.objectweb.asm.MethodVisitor;
 
-
 import static org.objectweb.asm.Opcodes.ALOAD;
-import static org.objectweb.asm.Opcodes.ASTORE;
 import static org.objectweb.asm.Opcodes.GETSTATIC;
 import static org.objectweb.asm.Opcodes.INVOKEVIRTUAL;
 
@@ -43,7 +41,6 @@ public class PrintNode implements IoNode{
                 methodVisitor.visitMethodInsn(INVOKEVIRTUAL, "java/io/PrintStream", "println", "(Ljava/lang/Object;)V", false);
             }
         }
-        methodVisitor.visitVarInsn(ASTORE, context.getCountVars());
     }
 
 }
