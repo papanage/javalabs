@@ -13,7 +13,11 @@ public class IoComputer {
     @Getter
     List<IoNode> prog = new ArrayList<>();
     public void generate(MethodVisitor methodVisitor) {
-        prog.forEach((x) -> x.doSomething(methodVisitor, context));
+
+        prog.forEach((x) -> {
+            System.out.println(context.getCountVars());
+            x.doSomething(methodVisitor, context);
+        });
     }
 
 }

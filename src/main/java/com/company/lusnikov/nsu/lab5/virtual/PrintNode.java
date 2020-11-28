@@ -21,7 +21,6 @@ public class PrintNode implements IoNode{
             context.setIsPrint(true);
         }
 
-        context.setCountVars(context.getCountVars() + 1);
         int pos;
         if (varname == null) {
             methodVisitor.visitFieldInsn(GETSTATIC, "java/lang/System", "out", "Ljava/io/PrintStream;");

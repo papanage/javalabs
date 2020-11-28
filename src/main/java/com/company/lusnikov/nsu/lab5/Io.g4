@@ -10,7 +10,7 @@ expr:
     | declvar
     ;
 declvar : SPACE* 'var ' VARNAME ('=') (INT |STRING);
-var: SPACE* VARNAME ('=') (INT | STRING);
+var: SPACE* VARNAME ('=') (VARNAME | INT | STRING);
 goto_: SPACE* 'goto ' INT ;
 label: SPACE* 'label ' INT ;
 print: SPACE* 'print' SPACE* (VARNAME | STRING);

@@ -1,15 +1,10 @@
 package com.company.lusnikov.nsu.lab5;
 
-import java.util.Random;
-
 public class Test {
     public static void main(String[] args) {
-        Random random = new Random();
-        Integer a = random.nextInt();
-        Integer b = random.nextInt();
-
-        if (a > b) {
-            System.out.println(a);
-        }
+        Integer a = 44444;
+        Integer d = 455;
+        d = 324324324;
+        a = d;
     }
 }

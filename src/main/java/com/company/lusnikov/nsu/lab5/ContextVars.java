@@ -14,7 +14,7 @@ public class ContextVars {
     private Map<String, StringWithPos> strings = new HashMap<>();
     private Map<String, IntWithPos> integers = new HashMap<>();
     /**
-     * label, pos
+     * label, count
      */
     private Map<Label, Integer> labelIntegerMap = new HashMap<>();
     /**
