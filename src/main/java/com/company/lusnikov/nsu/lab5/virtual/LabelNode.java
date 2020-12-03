@@ -12,7 +12,6 @@ public class LabelNode implements IoNode{
     IoComputer computer;
     @Override
     public void doSomething(MethodVisitor methodVisitor, ContextVars context) {
-        System.out.println("LABEL COMPUTE " + id);
 
         methodVisitor.visitLabel(label);
 

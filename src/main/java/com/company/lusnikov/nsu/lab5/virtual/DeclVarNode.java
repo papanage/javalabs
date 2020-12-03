@@ -19,7 +19,6 @@ public class DeclVarNode implements IoNode{
             context.setIsDecl(true);
         }
 
-        System.out.println("DECLVAR: " + name + " " + i + " " + s + context.getCountVars());
         context.setCountVars(context.getCountVars() + 1);
         if (i == null) {
             context.getStrings().put(name, new ContextVars.StringWithPos(s, context.getCountVars()));

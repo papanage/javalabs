@@ -4,7 +4,7 @@ import lombok.Data;
 
 @Data
 public class Condition {
-    private Condition not;
+    private Boolean isNot;
     private String var1;
     private String var2;
 

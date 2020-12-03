@@ -21,7 +21,6 @@ public class VarNode implements IoNode{
             context.setIsDecl(true);
         }
 
-        System.out.println("VAR Change: " + source + " " +target + " " + i + " " + s);
         if (target != null) {
             int source_pos;
             int target_pos;
@@ -43,7 +42,6 @@ public class VarNode implements IoNode{
             methodVisitor.visitVarInsn(ASTORE, source_pos);
 
         } else {
-            System.out.println("FSD432423");
             methodVisitor.visitLdcInsn(i);
             methodVisitor.visitMethodInsn(INVOKESTATIC, "java/lang/Integer", "valueOf", "(I)Ljava/lang/Integer;", false);
             int  source_pos = context.getIntegers().get(source).getPos();

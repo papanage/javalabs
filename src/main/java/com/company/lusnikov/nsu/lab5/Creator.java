@@ -38,7 +38,6 @@ public class Creator extends gramma.IoBaseListener{
 
     MethodVisitor methodVisitor;
     IoComputer computer = new IoComputer();
-    //Label last;
 
     @Override
     public void enterProg(IoParser.ProgContext ctx) {
@@ -103,37 +102,37 @@ public class Creator extends gramma.IoBaseListener{
     }
 
 
+    //TODO: add support literals compare and string var
     @Override
     public void exitCond(IoParser.CondContext ctx) {
-        System.out.println("dfgdfgdsfgdsgdsg");
-         //
-         List<IoParser.OrderableContext> context = ctx.orderable();
 
-         System.out.println(context.get(0).VARNAME());
-         System.out.println(context.get(1).VARNAME());
+        List<IoParser.OrderableContext> context = ctx.orderable();
+        System.out.println(context.get(0).VARNAME());
+        System.out.println(context.get(1).VARNAME());
         Condition condition = new Condition();
         condition.setVar1(ctx.orderable(0).VARNAME().toString());
         condition.setVar2(ctx.orderable(1).VARNAME().toString());
+        if (ctx.not() != null) {
+            condition.setIsNot(true);
+        }
+        else condition.setIsNot(false);
 
        computer.getProg().add(IfStartNode
                 .builder()
                 .condition(condition)
                 .computer(computer)
                 .build());
-
         super.exitCond(ctx);
     }
 
     @Override
     public void exitIf_(IoParser.If_Context ctx) {
-      //  if (ctx.cond().orderable().get(0).INT() != null) {
             computer.getProg().add(IfEndNode
                     .builder()
                     .computer(computer)
                     .build());
 
 
-      //  }
         super.exitIf_(ctx);
     }
 
@@ -147,7 +146,6 @@ public class Creator extends gramma.IoBaseListener{
                 .label(label)
                 .computer(computer)
                 .build());
-        computer.context.getLabelIntegerMap().put(label, computer.context.getCountVars());
         computer.context.getLabelList().put(Integer.parseInt(ctx.INT().toString()), label);
        // last = label;
         super.exitLabel(ctx);
@@ -194,24 +192,25 @@ public class Creator extends gramma.IoBaseListener{
 
         Creator creator = new Creator();
         creator.test2();
+        creator = new Creator();
+        creator.test1();
     }
 
     public void test1() throws Exception {
-        gramma.IoLexer lexer = new gramma.IoLexer(CharStreams.fromString(" var a=21\n" +
-                " if (a>3) then\n" +
-                " var d=3\n" +
-                "end\n"));
+        String code = FileUtils.readFileToString(
+                new File(getClass().getResource("/test").toURI().getPath()), StandardCharsets.UTF_8);
+        gramma.IoLexer lexer = new gramma.IoLexer(CharStreams.fromString(code));
         CommonTokenStream tokens = new CommonTokenStream(lexer);
         gramma.IoParser parser = new gramma.IoParser(tokens);
-        gramma.IoParser.ProgContext progContext = parser.prog();
-        File file = new File("Code1.class");
+
+        File file = new File("Code.class");
         FileOutputStream fileOutputStream = new FileOutputStream(file);
-        fileOutputStream.write(dump(parser, "Code2"));
+        fileOutputStream.write(dump(parser, "Code"));
     }
 
     public void test2() throws Exception {
         String code = FileUtils.readFileToString(
-                new File(getClass().getResource("/test").toURI().getPath()), StandardCharsets.UTF_8);
+                new File(getClass().getResource("/test2").toURI().getPath()), StandardCharsets.UTF_8);
         gramma.IoLexer lexer = new gramma.IoLexer(CharStreams.fromString(code));
         CommonTokenStream tokens = new CommonTokenStream(lexer);
         gramma.IoParser parser = new gramma.IoParser(tokens);
@@ -235,8 +234,6 @@ public class Creator extends gramma.IoBaseListener{
         methodVisitor.visitLabel(last);
         methodVisitor.visitFrame(Opcodes.F_SAME, 0, null, 0, null);
         methodVisitor.visitInsn(RETURN);
-       // methodVisitor.visitFrame(Opcodes.F_APPEND,2, new Object[] {"java/lang/Integer", "java/lang/Integer"}, 0, null);
-        //
 
         methodVisitor.visitLocalVariable("args", "[Ljava/lang/String;", null, computer.context.getLabelList().get(0), last, 0);
 
@@ -292,8 +289,6 @@ public class Creator extends gramma.IoBaseListener{
         methodVisitor.visitCode();
         Label label0 = new Label();
         methodVisitor.visitLabel(label0);
-       // methodVisitor.visitFrame(Opcodes.F_APPEND,0, new Object[] {}, 0, null);
-
 
 
         computer.context.getLabelList().put(0, label0);

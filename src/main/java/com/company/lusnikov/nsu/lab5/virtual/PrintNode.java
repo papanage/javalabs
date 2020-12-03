@@ -17,10 +17,8 @@ public class PrintNode implements IoNode{
     @Override
     public void doSomething(MethodVisitor methodVisitor, ContextVars context) {
 
-        //computer.setStackFrame(methodVisitor);
 
 
-        System.out.println("PRINT: " + varname + " " + s);
         if (!context.getIsPrint()) {
             context.setOperCount2(context.getOperCount2() + 1);;
             context.setIsPrint(true);

@@ -16,13 +16,6 @@ public class ContextVars {
     private Map<String, IntWithPos> integers = new HashMap<>();
     private Stack<Label> iflabel = new Stack<>();
     private Boolean isAfterDecl = false;
-    /**
-     * label, count
-     */
-    private Map<Label, Integer> labelIntegerMap = new HashMap<>();
-    /**
-     * id, label
-     */
     private Map<Integer, Label> labelList = new HashMap<>();
 
     private Boolean isPrint = false;

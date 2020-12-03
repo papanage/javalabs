@@ -7,6 +7,7 @@ import org.objectweb.asm.Label;
 import org.objectweb.asm.MethodVisitor;
 
 import static org.objectweb.asm.Opcodes.ALOAD;
+import static org.objectweb.asm.Opcodes.IF_ICMPGT;
 import static org.objectweb.asm.Opcodes.IF_ICMPLE;
 import static org.objectweb.asm.Opcodes.INVOKEVIRTUAL;
 
@@ -16,7 +17,6 @@ public class IfStartNode implements IoNode {
     IoComputer computer;
     @Override
     public void doSomething(MethodVisitor methodVisitor, ContextVars context) {
-        System.out.println("STRTA IF");
         Label label = new Label();
         context.getIflabel().push(label);
         if (condition.getVar1() != null){
@@ -30,7 +30,10 @@ public class IfStartNode implements IoNode {
 
         }
 
-        methodVisitor.visitJumpInsn(IF_ICMPLE, label);
+       if (!condition.getIsNot()) {
+           methodVisitor.visitJumpInsn(IF_ICMPLE, label);
+       } else
+           methodVisitor.visitJumpInsn(IF_ICMPGT, label);
         Label body = new Label();
         methodVisitor.visitLabel(body);
     }

@@ -1,4 +1,9 @@
-# javalabs
-Java 8 requirements. Example start programm "java -jar your.jar classname.class"
+# LAB 5 Компилятор простого языка
+Java 8 requirements. Язык называется IO
+## Требования к программе
+* Декларация переменных в начале программы
+* Сравнивать в if (..) только переменные типа int
 
-Here I would publish solution of task course "Java Optimization" NSU 2020
+Примеры программ в ресурсах
+
+

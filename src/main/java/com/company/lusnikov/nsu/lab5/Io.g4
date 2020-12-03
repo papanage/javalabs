@@ -16,9 +16,10 @@ label: SPACE* 'label ' INT ;
 print: SPACE* 'print' SPACE* (VARNAME | STRING);
 if_: SPACE* 'if ' NEWLINE* '('cond')' NEWLINE* ' then' NEWLINE (expr NEWLINE)* 'end' ;
 cond:
-    'not' cond
-    | orderable '>' orderable;
+    not? SPACE* orderable '>' orderable;
 orderable : INT | STRING | VARNAME;
+not : NOT;
+NOT : 'not';
 NEWLINE : [\r\n]+ ;
 INT     : [1-9]+[0-9]* | [0];
 VARNAME : [a-z]+;
