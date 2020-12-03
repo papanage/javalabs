@@ -2,7 +2,6 @@ package com.company.lusnikov.nsu.lab5;
 
 import com.company.lusnikov.nsu.lab5.virtual.DeclVarNode;
 import com.company.lusnikov.nsu.lab5.virtual.GotoNode;
-import com.company.lusnikov.nsu.lab5.virtual.IfEndNode;
 import com.company.lusnikov.nsu.lab5.virtual.IfStartNode;
 import com.company.lusnikov.nsu.lab5.virtual.IoComputer;
 import com.company.lusnikov.nsu.lab5.virtual.LabelNode;
@@ -23,6 +22,7 @@ import org.objectweb.asm.RecordComponentVisitor;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.nio.charset.StandardCharsets;
+import java.util.List;
 
 import static org.objectweb.asm.Opcodes.ACC_PUBLIC;
 import static org.objectweb.asm.Opcodes.ACC_STATIC;
@@ -101,21 +101,37 @@ public class Creator extends gramma.IoBaseListener{
         super.enterPrint(ctx);
     }
 
+
     @Override
-    public void enterIf_(IoParser.If_Context ctx) {
-        System.out.println(ctx.cond());
-        computer.getProg().add(IfStartNode
+    public void exitCond(IoParser.CondContext ctx) {
+        System.out.println("dfgdfgdsfgdsgdsg");
+         //
+         List<IoParser.OrderableContext> context = ctx.orderable();
+
+         System.out.println(context.get(0).VARNAME());
+         System.out.println(context.get(1).VARNAME());
+        Condition condition = new Condition();
+        condition.setVar1(ctx.orderable(0).VARNAME().toString());
+        condition.setVar2(ctx.orderable(1).VARNAME().toString());
+
+       computer.getProg().add(IfStartNode
                 .builder()
+                .condition(condition)
+                .computer(computer)
                 .build());
-        super.enterIf_(ctx);
+
+        super.exitCond(ctx);
     }
 
     @Override
     public void exitIf_(IoParser.If_Context ctx) {
         if (ctx.cond().orderable().get(0).INT() != null) {
-            computer.getProg().add(IfEndNode
+            /*computer.getProg().add(IfEndNode
                     .builder()
+                    .computer(computer)
                     .build());
+
+             */
         }
         super.exitIf_(ctx);
     }

@@ -1,11 +1,11 @@
 package com.company.lusnikov.nsu.lab5;
 
-import lombok.Builder;
+import lombok.Data;
 
-@Builder
+@Data
 public class Condition {
     private Condition not;
-    private Integer i1;
-    private Integer i2;
+    private String var1;
+    private String var2;
 
 }

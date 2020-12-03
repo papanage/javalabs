@@ -3,6 +3,7 @@ package com.company.lusnikov.nsu.lab5.virtual;
 import com.company.lusnikov.nsu.lab5.ContextVars;
 import lombok.Getter;
 import org.objectweb.asm.MethodVisitor;
+import org.objectweb.asm.Opcodes;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,6 +42,15 @@ public class IoComputer {
         }
         context.setIsAfterDecl(true);
         return objects;
+    }
+
+    public void setStackFrame(MethodVisitor methodVisitor) {
+        if (!context.getIsAfterDecl()) {
+            methodVisitor.visitFrame(Opcodes.F_FULL,context.getCountVars() + 1, getStackFrame() , 0, null);
+        }
+        else {
+            methodVisitor.visitFrame(Opcodes.F_SAME, 0, null, 0, null);
+        }
     }
 
 }
