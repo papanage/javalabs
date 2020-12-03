@@ -10,7 +10,7 @@ import java.util.Map;
 
 @Data
 public class ContextVars {
-
+    private Boolean isContextChange = false;
     private Map<String, StringWithPos> strings = new HashMap<>();
     private Map<String, IntWithPos> integers = new HashMap<>();
     /**

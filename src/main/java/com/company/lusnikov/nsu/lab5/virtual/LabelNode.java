@@ -36,11 +36,8 @@ public class LabelNode implements IoNode{
         Arrays.stream(objects).forEach(System.out::println);
         System.out.println("count end");
         methodVisitor.visitLabel(label);
-        //if (id != 2) {
-          //  methodVisitor.visitFrame(Opcodes.F_APPEND,count, objects, 0, null);
-            methodVisitor.visitFrame(Opcodes.F_FULL,count+1, objects, 0, null);
-        //}
-        //else         methodVisitor.visitFrame(Opcodes.F_SAME, 0, null, 0, null);
+        methodVisitor.visitFrame(Opcodes.F_FULL,count+1, objects, 0, null);
 
+        context.setIsContextChange(false);
     }
 }

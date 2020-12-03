@@ -2,6 +2,7 @@ package com.company.lusnikov.nsu.lab5;
 
 import com.company.lusnikov.nsu.lab5.virtual.DeclVarNode;
 import com.company.lusnikov.nsu.lab5.virtual.GotoNode;
+import com.company.lusnikov.nsu.lab5.virtual.IfNode;
 import com.company.lusnikov.nsu.lab5.virtual.IoComputer;
 import com.company.lusnikov.nsu.lab5.virtual.LabelNode;
 import com.company.lusnikov.nsu.lab5.virtual.PrintNode;
@@ -61,6 +62,7 @@ public class Creator extends gramma.IoBaseListener{
                     .builder()
                     .s(zn)
                     .name(varname)
+
                     .build());
 
         } else {
@@ -85,15 +87,29 @@ public class Creator extends gramma.IoBaseListener{
             computer.getProg().add(PrintNode
                     .builder()
                     .s(zn)
+                    .prog(computer.getProg())
                     .build());
         } else {
             computer.getProg().add(PrintNode
                     .builder()
                     .varname(ctx.VARNAME().toString())
+                    .prog(computer.getProg())
                     .build());
         }
 
         super.enterPrint(ctx);
+    }
+
+    @Override
+    public void exitIf_(IoParser.If_Context ctx) {
+        if (ctx.cond().orderable().get(0).INT() != null) {
+            computer.getProg().add(IfNode
+                    .builder()
+                    .i1(Integer.parseInt(ctx.cond().orderable().get(0).INT().toString()))
+                    .i2(Integer.parseInt(ctx.cond().orderable().get(1).INT().toString()))
+                    .build());
+        }
+        super.exitIf_(ctx);
     }
 
     @Override

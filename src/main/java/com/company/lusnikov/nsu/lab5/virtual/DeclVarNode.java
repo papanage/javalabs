@@ -3,6 +3,7 @@ package com.company.lusnikov.nsu.lab5.virtual;
 import com.company.lusnikov.nsu.lab5.ContextVars;
 import lombok.Builder;
 import org.objectweb.asm.MethodVisitor;
+
 import static org.objectweb.asm.Opcodes.ASTORE;
 import static org.objectweb.asm.Opcodes.INVOKESTATIC;
 
@@ -29,6 +30,8 @@ public class DeclVarNode implements IoNode{
             methodVisitor.visitMethodInsn(INVOKESTATIC, "java/lang/Integer", "valueOf", "(I)Ljava/lang/Integer;", false);
         }
         methodVisitor.visitVarInsn(ASTORE, context.getCountVars());
+        context.setIsContextChange(true);
+
     }
 
 }
