@@ -20,4 +20,27 @@ public class IoComputer {
         });
     }
 
+    public Object[] getStackFrame() {
+        Integer count = context.getCountVars();
+        Object[] objects = new Object[count + 1];
+        objects[0] = "[Ljava/lang/String;";
+        int j = 0;
+        for (int i = 0; i < prog.size(); i++) {
+            if (prog.get(i).equals(this)) break;
+            if (prog.get(i) instanceof DeclVarNode) {
+                j++;
+                DeclVarNode declVarNode = (DeclVarNode) prog.get(i);
+                if (declVarNode.s == null) {
+                    System.out.println("java/lang/Integer");
+                    objects[j] = "java/lang/Integer";
+                } else {
+                    System.out.println("java/lang/String");
+                    objects[j] = "java/lang/String";
+                }
+            }
+        }
+        context.setIsAfterDecl(true);
+        return objects;
+    }
+
 }

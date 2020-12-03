@@ -1,14 +1,14 @@
 var a="44444"
 var d="455"
-goto 1
-label 1
-print d
-d=a
-print d
-label 1
 var f=3
-f=43
-print "dd"
-goto 5
-print "gg"
-label 5
+goto 2
+label 1
+goto 3
+print d
+goto 3
+goto 2
+goto 1
+label 3
+label 2
+print a
+
