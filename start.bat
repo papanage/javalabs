@@ -1,0 +1,1 @@
+mvn clean package  && copy javaagent\target\javaagent-1.0-jar-with-dependencies.jar dem\target\classes\javaagent-1.0-jar-with-dependencies.jar && cd dem\target\classes && java -javaagent:javaagent-1.0-jar-with-dependencies.jar TransactionProcessor
