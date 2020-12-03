@@ -1,9 +1,0 @@
-var a="34"
-var b=43
-goto 1
-print b
-label 1
-label 2
-goto 3
-label 3
-print a
