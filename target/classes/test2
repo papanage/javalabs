@@ -1,0 +1,9 @@
+var f=4
+var t=3
+label 1
+if (f>t) then
+    print t
+    t=5
+    goto 1
+end
+print t
