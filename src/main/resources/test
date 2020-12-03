@@ -1,8 +1,11 @@
 var f=3
 var t=4
-if (f>t) then
-f=5
-print f
+goto 1
+if (t>f) then
+    f=5
+    print f
+    goto 1
+    label 1
+    print f
 end
 print f
-

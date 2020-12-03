@@ -2,6 +2,7 @@ package com.company.lusnikov.nsu.lab5;
 
 import com.company.lusnikov.nsu.lab5.virtual.DeclVarNode;
 import com.company.lusnikov.nsu.lab5.virtual.GotoNode;
+import com.company.lusnikov.nsu.lab5.virtual.IfEndNode;
 import com.company.lusnikov.nsu.lab5.virtual.IfStartNode;
 import com.company.lusnikov.nsu.lab5.virtual.IoComputer;
 import com.company.lusnikov.nsu.lab5.virtual.LabelNode;
@@ -125,14 +126,14 @@ public class Creator extends gramma.IoBaseListener{
 
     @Override
     public void exitIf_(IoParser.If_Context ctx) {
-        if (ctx.cond().orderable().get(0).INT() != null) {
-            /*computer.getProg().add(IfEndNode
+      //  if (ctx.cond().orderable().get(0).INT() != null) {
+            computer.getProg().add(IfEndNode
                     .builder()
                     .computer(computer)
                     .build());
 
-             */
-        }
+
+      //  }
         super.exitIf_(ctx);
     }
 

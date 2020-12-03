@@ -10,6 +10,7 @@ public class IfEndNode implements IoNode {
     IoComputer computer;
     @Override
     public void doSomething(MethodVisitor methodVisitor, ContextVars context) {
+        System.out.println("IF END");
         Label label = context.getIflabel().pop();
         methodVisitor.visitLabel(label);
         computer.setStackFrame(methodVisitor);
